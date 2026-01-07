@@ -6,14 +6,10 @@ from langchain_openai import ChatOpenAI
 from get_embedding_function import get_embedding_function
 
 import openai 
-from dotenv import load_dotenv
-import os
+import streamlit as st
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 
-# Load environment variables. Assumes that project contains .env file with API keys
-load_dotenv()
-#---- Set OpenAI API key 
-openai.api_key = os.environ['OPENAI_API_KEY']
 
 
 CHROMA_PATH = "chroma"
