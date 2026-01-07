@@ -1,5 +1,8 @@
-pypdf
-langchain
-chromadb # Vector storage
-pytest
-boto3
+langchain_chroma==1.1.0
+langchain_community==0.4.1
+langchain_core==1.2.6
+langchain_openai==1.1.6
+langchain_text_splitters==1.1.0
+openai==2.14.0
+python-dotenv==1.2.1
+streamlit==1.52.2
