@@ -1,6 +1,6 @@
-import argparse
+
 import os
-import shutil
+import shutil, stat
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
@@ -12,16 +12,7 @@ CHROMA_PATH = "chroma"
 DATA_PATH = "data"
 
 
-def main():
-
-    # Check if the database should be cleared (using the --clear flag).
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--reset", action="store_true", help="Reset the database.")
-    args = parser.parse_args()
-    if args.reset:
-        print("✨ Clearing Database")
-        clear_database()
-
+def populate_database():
     # Create (or update) the data store.
     documents = load_documents()
     chunks = split_documents(documents)
@@ -102,8 +93,8 @@ def calculate_chunk_ids(chunks):
 
 def clear_database():
     if os.path.exists(CHROMA_PATH):
+        print("CHROMA_PATH: _________________________" + CHROMA_PATH)
+        os.chmod(CHROMA_PATH, stat.S_IWRITE)
         shutil.rmtree(CHROMA_PATH)
+        print("deleted")
 
-
-if __name__ == "__main__":
-    main()
